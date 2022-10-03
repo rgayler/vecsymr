@@ -1,5 +1,13 @@
-# function to make an atomic VSA vector
-
+#' Make an atomic VSA vector (bipolar)
+#'
+#' @param vsa_dim An integer (>0) - The dimensionality of the returned VSA vector.
+#' @param seed An integer or NULL - The random generator seed for the returned VSA vector.
+#'
+#' @return A numeric vector with length vsa_dim.
+#' @export
+#'
+#' @examples
+#' vsa_mk_atom_bipolar(10L)
 vsa_mk_atom_bipolar <- function(
     vsa_dim, # integer - dimensionality of VSA vector
     seed = NULL # integer - seed for random number generator
