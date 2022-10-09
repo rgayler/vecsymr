@@ -4,18 +4,34 @@
 # vecsymr
 
 <!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of vecsymr is to implement Vector Symbolic Architecture (VSA)
-primitives to support experimentation. Design choices are Ross Gayler’s
-personal preferences for a simple experimental system (The VSA
-equivalent of the geneticist’s fruitfly). Vector elements are phasors
-(unit magnitude complex numbers). There are some extra features intended
-to support non-negativity.
+The goal of `vecsymr` is to implement Vector Symbolic Architecture (VSA)
+primitives to support experimentation. It is intended to be a simple VSA
+implementation (the VSA equivalent of the geneticist’s fruit fly) to
+providse a convenient base for experimentation. The design choices are
+\[my\]{<https://www.rossgayler.com>} personal preferences to support my
+research. The initial emphasis is on functionality and flexibility with
+no specific concern for performance. There is no intention to put this
+package on CRAN.
+
+I believe that phasor VSAs (where the vector elements are unit magnitude
+complex numbers) are the best choice for basic VSAs. However, I have
+initially imported functions for bipolar VSAs from
+
+\[VSA_altitude_hold\]{<https://github.com/rgayler/VSA_altitude_hold>} to
+provide some code while I get the hang of writing an R package. Once the
+package contains enough phasor VSA code I will probably remove the
+bipolar VSA code. The phasor VSA code will probably include some extra
+features to support non-negativity and experimentation with clean-up
+memory.
 
 ## Installation
 
-You can install the development version of vecsymr from
+You can install the development version of `vecsymr` from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -23,7 +39,14 @@ You can install the development version of vecsymr from
 devtools::install_github("rgayler/vecsymr")
 ```
 
-## Edit below here
+The current implementation is experimental. I expect the functional
+content to evolve as I work out what I want this package to do. I also
+expect the API to evolve as I work out how to make it easier to work
+with. If you want to do any reproducible work with the package you will
+need to use something like [{renv}](https://rstudio.github.io/renv/) to
+freeze the version in use.
+
+## Ignore below here
 
 Everything after this point is just boilerplate to be edited.
 
@@ -36,19 +59,7 @@ library(vecsymr)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+## Remember
 
 You’ll still need to render `README.Rmd` regularly, to keep `README.md`
 up-to-date. `devtools::build_readme()` is handy for this. You could also
@@ -56,9 +67,5 @@ use GitHub Actions to re-render `README.Rmd` every time you push. An
 example workflow can be found here:
 <https://github.com/r-lib/actions/tree/v1/examples>.
 
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+If you create figures in the README don’t forget to commit and push the
+resulting figure files, so they display on GitHub.

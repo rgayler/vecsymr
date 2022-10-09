@@ -1,36 +1,51 @@
-#' Make an atomic VSA vector (bipolar)
+#' Make a bipolar atomic VSA vector
 #'
-#' @param vsa_dim An integer (>0) - The dimensionality of the returned VSA vector.
-#' @param seed An integer or NULL - The random generator seed for the returned VSA vector.
+#' @description Make an atomic VSA vector with bipolar element values.
 #'
-#' @return A numeric vector with length vsa_dim.
+#' @param vsa_dim An integer > 0 - The dimensionality of the returned VSA vector.
+#' @param seed An integer or NULL - The random number generator seed to use.
+#'
+#' @return A numeric vector with length `vsa_dim` and elements randomly selected
+#'   from \eqn{\{-1, +1\}}.
 #' @export
 #'
+#' @details Creates a randomly selected bipolar VSA vector with dimensionality
+#'   `vsa_dim`: \eqn{\{-1, +1\}^{vsa\_dim}}. The values from \eqn{\{-1, +1\}}
+#'   are randomly selected with equal probability.
+#'
+#' If `seed` is given it is passed to the random number generator so that the
+#' result VSA vector is directly reproducible (it is a function of the seed).
+#'
+#' If `seed` is not given or is `NULL` the random number generator continues
+#' from its current state and the result VSA vector is not *directly*
+#' reproducible. However, the current state of the random number generator is
+#' *indirectly* reproducible from the initial seed and all the intervening
+#' invocations of the random number generator (assuming deterministic
+#' execution).
+#'
+#' If you really care about randomisation and reproducibility you will have to
+#' think carefully about generating seeds before you use them.
+#'
 #' @examples
-#' vsa_mk_atom_bipolar(10L)
+#' vsa_mk_atom_bipolar(10)
+
 vsa_mk_atom_bipolar <- function(
-    vsa_dim, # integer - dimensionality of VSA vector
-    seed = NULL # integer - seed for random number generator
-) # value # one randomly selected VSA vector of dimension vsa_dim
+    vsa_dim,
+    seed = NULL
+)
 {
-  ### Set up the arguments ###
-  # The OCD error checking is probably more useful as documentation
-  if(missing(vsa_dim))
-    stop("vsa_dim must be specified")
+  ### Check the arguments ###
+  # vsa_dim: integerish & not NA & > 0
+  vsa_dim <- checkmate::assert_count(vsa_dim, positive = TRUE, coerce = TRUE)
+  # seed: (integerish & not NA) | NULL
+  checkmate::assert_int(seed, null.ok = TRUE)
 
-  if(!(is.vector(vsa_dim, mode = "integer") && length(vsa_dim) == 1))
-    stop("vsa_dim must be an integer")
 
-  if(vsa_dim < 1)
-    stop("vsa_dim must be (much) greater than zero")
-
-  # check that the specified seed is an integer
-  if(!is.null(seed) &&!(is.vector(seed, mode = "integer") && length(seed) == 1))
-    stop("seed must be an integer")
-
-  # if seed is set the the vector is fixed
-  # otherwise it is randomised
-  set.seed(seed)
+  # If seed is set (an integer) then the returned vector is a function of the
+  # seed, otherwise it is continued from the current state of the random number
+  # generator
+  if(!is.null(seed))
+    set.seed(seed)
 
   # Construct a random bipolar vector
   sample(c(-1L, 1L), size = vsa_dim, replace = TRUE)

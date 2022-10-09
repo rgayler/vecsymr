@@ -2,21 +2,40 @@
 % Please edit documentation in R/vsa_mk_atom_bipolar.R
 \name{vsa_mk_atom_bipolar}
 \alias{vsa_mk_atom_bipolar}
-\title{Make an atomic VSA vector (bipolar)}
+\title{Make a bipolar atomic VSA vector}
 \usage{
 vsa_mk_atom_bipolar(vsa_dim, seed = NULL)
 }
 \arguments{
-\item{vsa_dim}{An integer (>0) - The dimensionality of the returned VSA vector.}
+\item{vsa_dim}{An integer > 0 - The dimensionality of the returned VSA vector.}
 
-\item{seed}{An integer or NULL - The random generator seed for the returned VSA vector.}
+\item{seed}{An integer or NULL - The random number generator seed to use.}
 }
 \value{
-A numeric vector with length vsa_dim.
+A numeric vector with length \code{vsa_dim} and elements randomly selected
+from \eqn{\{-1, +1\}}.
 }
 \description{
-Make an atomic VSA vector (bipolar)
+Make an atomic VSA vector with bipolar element values.
+}
+\details{
+Creates a randomly selected bipolar VSA vector with dimensionality
+\code{vsa_dim}: \eqn{\{-1, +1\}^{vsa\_dim}}. The values from \eqn{\{-1, +1\}}
+are randomly selected with equal probability.
+
+If \code{seed} is given it is passed to the random number generator so that the
+result VSA vector is directly reproducible (it is a function of the seed).
+
+If \code{seed} is not given or is \code{NULL} the random number generator continues
+from its current state and the result VSA vector is not \emph{directly}
+reproducible. However, the current state of the random number generator is
+\emph{indirectly} reproducible from the initial seed and all the intervening
+invocations of the random number generator (assuming deterministic
+execution).
+
+If you really care about randomisation and reproducibility you will have to
+think carefully about generating seeds before you use them.
 }
 \examples{
-vsa_mk_atom_bipolar(10L)
+vsa_mk_atom_bipolar(10)
 }
