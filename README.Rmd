@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test coverage](https://codecov.io/gh/rgayler/vecsymr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rgayler/vecsymr?branch=main)
+[![R-CMD-check](https://github.com/rgayler/vecsymr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rgayler/vecsymr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of {vecsymr} is to implement Vector Symbolic Architecture (VSA)
@@ -52,7 +53,7 @@ The current implementation is experimental. I expect the functional content to
 evolve as I work out what I want this package to do. I also expect the API to
 evolve as I work out how to make it easier to work with. If you want to do any
 reproducible work with the package you will need to use something like
-[{renv}](https://rstudio.github.io/renv/) to freeze the version in use.
+[`{renv}`](https://rstudio.github.io/renv/) to freeze the version in use.
 
 ## Ignore below here
 
