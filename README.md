@@ -45,8 +45,8 @@ The current implementation is experimental. I expect the functional
 content to evolve as I work out what I want this package to do. I also
 expect the API to evolve as I work out how to make it easier to work
 with. If you want to do any reproducible work with the package you will
-need to use something like [{renv}](https://rstudio.github.io/renv/) to
-freeze the version in use.
+need to use something like [`{renv}`](https://rstudio.github.io/renv/)
+to freeze the version in use.
 
 ## Ignore below here
 
