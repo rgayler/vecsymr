@@ -7,22 +7,22 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test
+coverage](https://codecov.io/gh/rgayler/vecsymr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rgayler/vecsymr?branch=main)
 <!-- badges: end -->
 
-The goal of `vecsymr` is to implement Vector Symbolic Architecture (VSA)
+The goal of {vecsymr} is to implement Vector Symbolic Architecture (VSA)
 primitives to support experimentation. It is intended to be a simple VSA
 implementation (the VSA equivalent of the geneticist’s fruit fly) to
 providse a convenient base for experimentation. The design choices are
-\[my\]{<https://www.rossgayler.com>} personal preferences to support my
+[my](https://www.rossgayler.com) personal preferences to support my
 research. The initial emphasis is on functionality and flexibility with
-no specific concern for performance. There is no intention to put this
-package on CRAN.
+no specific concern for performance.
 
 I believe that phasor VSAs (where the vector elements are unit magnitude
 complex numbers) are the best choice for basic VSAs. However, I have
 initially imported functions for bipolar VSAs from
-
-\[VSA_altitude_hold\]{<https://github.com/rgayler/VSA_altitude_hold>} to
+[VSA_altitude_hold](https://github.com/rgayler/VSA_altitude_hold) to
 provide some code while I get the hang of writing an R package. Once the
 package contains enough phasor VSA code I will probably remove the
 bipolar VSA code. The phasor VSA code will probably include some extra
@@ -31,13 +31,15 @@ memory.
 
 ## Installation
 
-You can install the development version of `vecsymr` from
+You can install the development version of {vecsymr} from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("rgayler/vecsymr")
 ```
+
+There is no intention to put this package on CRAN.
 
 The current implementation is experimental. I expect the functional
 content to evolve as I work out what I want this package to do. I also
