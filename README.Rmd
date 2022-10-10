@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
 The goal of {vecsymr} is to implement Vector Symbolic Architecture (VSA)
 primitives to support experimentation. It is intended to be a simple VSA
-implementation (the VSA equivalent of the geneticist's fruit fly) to providse a
+implementation (the VSA equivalent of the geneticist's fruit fly) to provide a
 convenient base for experimentation. The design choices are
 [my](https://www.rossgayler.com) personal preferences to support my research.
 The initial emphasis is on functionality and flexibility with no specific
