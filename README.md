@@ -15,7 +15,7 @@ coverage](https://codecov.io/gh/rgayler/vecsymr/branch/main/graph/badge.svg)](ht
 The goal of {vecsymr} is to implement Vector Symbolic Architecture (VSA)
 primitives to support experimentation. It is intended to be a simple VSA
 implementation (the VSA equivalent of the geneticist’s fruit fly) to
-providse a convenient base for experimentation. The design choices are
+provide a convenient base for experimentation. The design choices are
 [my](https://www.rossgayler.com) personal preferences to support my
 research. The initial emphasis is on functionality and flexibility with
 no specific concern for performance.
@@ -40,7 +40,9 @@ You can install the development version of {vecsymr} from
 devtools::install_github("rgayler/vecsymr")
 ```
 
-There is currently no intention to put this package on CRAN.
+There is currently no intention to put this package on CRAN. If it turns
+out to be sufficiently useful and general I may try get it accepted as
+an [rOpenSci](https://ropensci.org/packages/) package.
 
 The current implementation is experimental. I expect the functional
 content to evolve as I work out what I want this package to do. I also

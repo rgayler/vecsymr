@@ -47,7 +47,10 @@ You can install the development version of {vecsymr} from
 # install.packages("devtools")
 devtools::install_github("rgayler/vecsymr")
 ```
-There is currently no intention to put this package on CRAN.
+
+There is currently no intention to put this package on CRAN. If it turns out to
+be sufficiently useful and general I may try get it accepted as an
+[rOpenSci](https://ropensci.org/packages/) package.
  
 The current implementation is experimental. I expect the functional content to
 evolve as I work out what I want this package to do. I also expect the API to
