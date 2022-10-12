@@ -1,4 +1,7 @@
 test_that("argument checks work", {
+  # Far from exhaustive tests. Essentially one per error condition expected to
+  # be caught, and a token few non-error conditions.
+
   # vsa_dim: mandatory & integerish & not NA & > 0
   expect_error(vsa_mk_atom_bipolar()) # vsa_dim missing
   expect_error(vsa_mk_atom_bipolar(vsa_dim = NULL)) # not integerish
@@ -9,6 +12,7 @@ test_that("argument checks work", {
   expect_error(vsa_mk_atom_bipolar(vsa_dim = 0)) # not > 0
   expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1.00000001)) # integerish
   expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1)) # integerish
+
   # seed: (integerish & not NA) | NULL
   expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = NULL)) # NULL
   expect_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = "")) # not integerish
@@ -39,4 +43,21 @@ test_that("result levels are equiprobable", {
   #   SD is 2*sqrt(0.5/vsa_dim)
   #   check mean is within 6*SD of 0
   expect_lt(abs(mean(vsa_mk_atom_bipolar(vsa_dim = 1e4))), 6*2*sqrt(0.5/1e4))
+})
+
+test_that("results are reproducible when expected", {
+  # Generated results should be identical across calls when seed is set identically,
+  expect_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42),
+                   vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42))
+  expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42),
+                       vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 43))
+  # Generated results should be different across calls when seed is not set
+  expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4),
+                       vsa_mk_atom_bipolar(vsa_dim = 1e4))
+  expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4),
+                       vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL))
+  expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL),
+                       vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL))
+  expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42),
+                       vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL))
 })
