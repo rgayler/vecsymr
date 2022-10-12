@@ -6,7 +6,7 @@ expect_not_identical <- function(object, expected, info = NULL, label = NULL,
   exp <- testthat::quasi_label(rlang::enquo(expected), expected.label, arg = "expected")
   # 2. Call expect()
   ident <- identical(act$val, exp$val, ...)
-  expect(
+  testthat::expect(
     !ident, # NOT identical
     sprintf("%s unexpectedly identical to %s.\n%s", act$lab, exp$lab, ""),
     info = info
