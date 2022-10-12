@@ -6,7 +6,7 @@
 \alias{vecsymr-package}
 \title{vecsymr: Vector Symbolic Architecture (VSA) primitives for experimentation}
 \description{
-Implements Vector Symbolic Architecture (VSA) primitives to support experimentation. Design choices are Ross Gayler's personal preferences for a simple experimental system (The VSA equivalent of the geneticist's fruitfly). Vector elements are phasors (unit magnitude complex numbers). There are some extra features intended to support non-negativity.
+Implements Vector Symbolic Architecture (VSA) primitives to support experimentation. Design choices are Ross Gayler's personal preferences for a simple experimental system (the VSA equivalent of the geneticist's fruitfly). Vector elements are phasors (unit magnitude complex numbers). There are some extra features intended to support non-negativity.
 }
 \seealso{
 Useful links:
