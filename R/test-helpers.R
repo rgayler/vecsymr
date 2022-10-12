@@ -2,8 +2,8 @@
 expect_not_identical <- function(object, expected, info = NULL, label = NULL,
                              expected.label = NULL, ...) {
   # 1. Capture objects and labels
-  act <- testthat:::quasi_label(rlang::enquo(object), label, arg = "object")
-  exp <- testthat:::quasi_label(rlang::enquo(expected), expected.label, arg = "expected")
+  act <- testthat::quasi_label(rlang::enquo(object), label, arg = "object")
+  exp <- testthat::quasi_label(rlang::enquo(expected), expected.label, arg = "expected")
   # 2. Call expect()
   ident <- identical(act$val, exp$val, ...)
   expect(
