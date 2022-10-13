@@ -31,24 +31,23 @@
 #' @examples
 #' vsa_mk_atom_bipolar(10)
 
-vsa_mk_atom_bipolar <- function(
-    vsa_dim,
-    seed = NULL
-)
+vsa_mk_atom_bipolar <- function(vsa_dim,
+                                seed = NULL)
 {
   ### Check the arguments ###
   # vsa_dim: integerish & not NA & > 0
-  vsa_dim <- checkmate::assert_count(vsa_dim, positive = TRUE, coerce = TRUE)
+  vsa_dim <-
+    checkmate::assert_count(vsa_dim, positive = TRUE, coerce = TRUE)
   # seed: (integerish & not NA) | NULL
-  checkmate::assert_int(seed, null.ok = TRUE)
+  seed <- checkmate::assert_int(seed, null.ok = TRUE, coerce = TRUE)
 
   ### Set seed ###
   # If seed is set (an integer) then the returned vector is a function of the
   # seed, otherwise it is continued from the current state of the random number
   # generator
-  if(!is.null(seed))
+  if (!is.null(seed))
     set.seed(seed)
 
-  ### Construct a random bipolar vector ###
+  ### Construct a random equiprobable bipolar vector ###
   sample(c(-1L, 1L), size = vsa_dim, replace = TRUE)
 }
