@@ -2,19 +2,21 @@
 #'
 #' @description Make an atomic VSA vector with bipolar element values.
 #'
-#' @param vsa_dim An integer > 0 - The dimensionality of the returned VSA vector.
-#' @param seed An integer or NULL - The random number generator seed to use.
+#' @param vsa_dim An integer \eqn{> 0} - The dimensionality of the returned VSA
+#'   vector.
+#' @param seed An integer or `NULL` - The random number generator seed to use.
 #'
 #' @return A numeric vector with length `vsa_dim` and elements randomly selected
-#'   from \eqn{\{-1, +1\}}.
+#'   from \eqn{\{-1, +1\}} with equal probability.
 #' @export
 #'
 #' @details Creates a randomly selected bipolar VSA vector with dimensionality
-#'   `vsa_dim`: \eqn{\{-1, +1\}^{vsa\_dim}}. The values from \eqn{\{-1, +1\}}
-#'   are randomly selected with equal probability.
+#'   `vsa_dim`: \eqn{v \in \{-1, +1\}^{vsa\_dim}}. The values from \eqn{\{-1,
+#'   +1\}} are randomly selected with equal probability.
 #'
-#' If `seed` is given it is passed to the random number generator so that the
-#' result VSA vector is directly reproducible (it is a function of the seed).
+#' If `seed` is an integer it is passed to the random number generator so that
+#' the result VSA vector is directly reproducible (it is a function of the
+#' seed).
 #'
 #' If `seed` is not given or is `NULL` the random number generator continues
 #' from its current state and the result VSA vector is not *directly*
@@ -40,13 +42,13 @@ vsa_mk_atom_bipolar <- function(
   # seed: (integerish & not NA) | NULL
   checkmate::assert_int(seed, null.ok = TRUE)
 
-
+  ### Set seed ###
   # If seed is set (an integer) then the returned vector is a function of the
   # seed, otherwise it is continued from the current state of the random number
   # generator
   if(!is.null(seed))
     set.seed(seed)
 
-  # Construct a random bipolar vector
+  ### Construct a random bipolar vector ###
   sample(c(-1L, 1L), size = vsa_dim, replace = TRUE)
 }

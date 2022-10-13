@@ -7,24 +7,26 @@
 vsa_mk_atom_bipolar(vsa_dim, seed = NULL)
 }
 \arguments{
-\item{vsa_dim}{An integer > 0 - The dimensionality of the returned VSA vector.}
+\item{vsa_dim}{An integer \eqn{> 0} - The dimensionality of the returned VSA
+vector.}
 
-\item{seed}{An integer or NULL - The random number generator seed to use.}
+\item{seed}{An integer or \code{NULL} - The random number generator seed to use.}
 }
 \value{
 A numeric vector with length \code{vsa_dim} and elements randomly selected
-from \eqn{\{-1, +1\}}.
+from \eqn{\{-1, +1\}} with equal probability.
 }
 \description{
 Make an atomic VSA vector with bipolar element values.
 }
 \details{
 Creates a randomly selected bipolar VSA vector with dimensionality
-\code{vsa_dim}: \eqn{\{-1, +1\}^{vsa\_dim}}. The values from \eqn{\{-1, +1\}}
-are randomly selected with equal probability.
+\code{vsa_dim}: \eqn{v \in \{-1, +1\}^{vsa\_dim}}. The values from \eqn{\{-1,
+  +1\}} are randomly selected with equal probability.
 
-If \code{seed} is given it is passed to the random number generator so that the
-result VSA vector is directly reproducible (it is a function of the seed).
+If \code{seed} is an integer it is passed to the random number generator so that
+the result VSA vector is directly reproducible (it is a function of the
+seed).
 
 If \code{seed} is not given or is \code{NULL} the random number generator continues
 from its current state and the result VSA vector is not \emph{directly}
