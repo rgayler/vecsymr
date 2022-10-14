@@ -1,4 +1,13 @@
+# All successful invocations of vsa_mk_atom_bipolar() advance the random number
+# generator, therefore alter the global state. Good test hygiene requires tests
+# to leave the global environment as they found it, hence the calls to
+# withr::local_seed(). vsa_mk_atom_bipolar() *should* work correctly regardless
+# of the prior seed value, so there's no need to have some specific prior seed
+# value. However, in the interests of absolute reproducibility of the tests I
+# use withr::local_seed() with a specific seed value.
+
 test_that("argument checks work", {
+  withr::local_seed(seed = 12345)
   # Far from exhaustive tests. Essentially one per error condition expected to
   # be caught, and a token few non-error conditions.
 
@@ -26,38 +35,62 @@ test_that("argument checks work", {
 })
 
 test_that("result is correct type and dimensionality", {
+  withr::local_seed(seed = 12345)
+
   # result is integer vector with length vsa_dim
-  expect_vector(vsa_mk_atom_bipolar(vsa_dim = 1), ptype = integer(), size = 1)
-  expect_vector(vsa_mk_atom_bipolar(vsa_dim = 100), ptype = integer(), size = 100)
-  expect_vector(vsa_mk_atom_bipolar(vsa_dim = 1e4), ptype = integer(), size = 1e4)
+  expect_vector(vsa_mk_atom_bipolar(vsa_dim = 1),
+                ptype = integer(),
+                size = 1)
+  expect_vector(vsa_mk_atom_bipolar(vsa_dim = 100),
+                ptype = integer(),
+                size = 100)
+  expect_vector(vsa_mk_atom_bipolar(vsa_dim = 1e4),
+                ptype = integer(),
+                size = 1e4)
 })
 
 test_that("result is correct domain", {
+  withr::local_seed(seed = 12345)
+
   # result elements are from {-1, +1}
   expect_setequal(vsa_mk_atom_bipolar(vsa_dim = 100), c(-1L, 1L))
 })
 
 test_that("result levels are equiprobable", {
+  withr::local_seed(seed = 12345)
+
   # result elements ({-1, +1}) are approximately equiprobable
   #   expected mean is 0.0
   #   SD is 2*sqrt(0.5/vsa_dim)
   #   check mean is within 6*SD of 0
-  expect_lt(abs(mean(vsa_mk_atom_bipolar(vsa_dim = 1e4))), 6*2*sqrt(0.5/1e4))
+  expect_lt(abs(mean(vsa_mk_atom_bipolar(vsa_dim = 1e4))), 6 * 2 * sqrt(0.5 /
+                                                                          1e4))
 })
 
 test_that("results are reproducible when expected", {
+  withr::local_seed(seed = 12345)
+
   # Generated results should be identical across calls when seed is set identically,
-  expect_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42),
-                   vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42))
-  expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42),
-                       vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 43))
+  expect_identical(
+    vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42),
+    vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42)
+  )
+  expect_not_identical(
+    vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42),
+    vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 43)
+  )
+
   # Generated results should be different across calls when seed is not set
   expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4),
                        vsa_mk_atom_bipolar(vsa_dim = 1e4))
   expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4),
                        vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL))
-  expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL),
-                       vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL))
-  expect_not_identical(vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42),
-                       vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL))
+  expect_not_identical(
+    vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL),
+    vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL)
+  )
+  expect_not_identical(
+    vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = 42),
+    vsa_mk_atom_bipolar(vsa_dim = 1e4, seed = NULL)
+  )
 })
