@@ -11,27 +11,35 @@ test_that("argument checks work", {
   # Far from exhaustive tests. Essentially one per error condition expected to
   # be caught, and a token few non-error conditions.
 
+  # The calls to expect_error() and expect_no_error() should check the error
+  # message or error class to ensure that they only refer to the intended errors
+  # from the checkmate assertions. Unfortunately, checkmate doesn't currently
+  # (2022-10-14) set a custom error class so we have to check the error
+  # messages. Also unfortunately, the checkmate error messages are a bit
+  # generic, so it's possible that other non-checkmate errors might produce
+  # matching error messages.
+
   # vsa_dim: mandatory & integerish & not NA & > 0
-  expect_error(vsa_mk_atom_bipolar()) # vsa_dim missing
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = NULL)) # not integerish
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = "")) # not integerish
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = TRUE)) # not integerish
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1.1)) # not integerish
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = NA)) # NA
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = 0)) # not > 0
-  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1.00000001)) # integerish
-  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1)) # integerish
+  expect_error(vsa_mk_atom_bipolar(), regexp = "vsa_dim") # vsa_dim missing
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = NULL), regexp = "vsa_dim") # not integerish
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = ""), regexp = "vsa_dim") # not integerish
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = TRUE), regexp = "vsa_dim") # not integerish
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1.1), regexp = "vsa_dim") # not integerish
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = NA), regexp = "vsa_dim") # NA
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = 0), regexp = "vsa_dim") # not > 0
+  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1.00000001), message = "vsa_dim") # integerish
+  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1), message = "vsa_dim") # integerish
 
   # seed: (integerish & not NA) | NULL
-  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = NULL)) # NULL
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = "")) # not integerish
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = TRUE)) # not integerish
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = 1.1)) # not integerish
-  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = NA)) # NA
-  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = 1.00000001)) # integerish
-  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = 1)) # integerish
-  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = 0)) # integerish, zero
-  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = -1)) # integerish, -ve
+  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = NULL), message = "seed") # NULL
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = ""), regexp = "seed") # not integerish
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = TRUE), regexp = "seed") # not integerish
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = 1.1), regexp = "seed") # not integerish
+  expect_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = NA), regexp = "seed") # NA
+  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = 1.00000001), message = "seed") # integerish
+  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = 1), message = "seed") # integerish
+  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = 0), message = "seed") # integerish, zero
+  expect_no_error(vsa_mk_atom_bipolar(vsa_dim = 1, seed = -1), message = "seed") # integerish, -ve
 })
 
 test_that("result is correct type and dimensionality", {
